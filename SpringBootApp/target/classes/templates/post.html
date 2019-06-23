@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	
+	<style>
+		textarea:focus{
+			outline: 0;
+		}
+		.btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {
+			outline: none;
+			border-color: transparent;
+			box-shadow:none;
+		}
+		.shadow{
+			-webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+			-moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+			box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+		}
+		.shadow-smaller{
+			-webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+			-moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+			box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+		}
+	
+	</style>
+</head>
+<body style="background-color: #fafafa">
+
+<div class="container-fluid">
+	<div class="row clearfix">
+		<ul class="nav nav-pills shadow" style="height:50px;background-color: #ffffff;margin-right: 0px;margin-left: 0px">
+			<li class="active">
+				<a href="http://localhost:8080/home" style="padding: 0 12px 0 12px;font-size: 28px">R</a>
+			</li>
+			<li>
+				<a style="font-size:16px; margin-top:2px" href="http://localhost:8080/home">首页</a>
+			</li>
+			
+			<li style="margin-left: 60px;margin-top: 8px">
+				<div class="input-group" style="width:342px">
+					<input type="text"  onclick="window.location.href='#'" class="form-control">
+					<span class="input-group-addon" style="background-color: #6db0ff;color:white;" onclick="window.location.href='#'">搜索</span>
+				</div>
+			</li>
+			<li class="dropdown pull-right" style="margin-top: 10px;margin-right: 8px">
+				<span class="text-muted" style="font-size:16px;margin-right:18px;">消息</span>
+				<span class="text-muted" style="font-size:16px;margin-right:18px;" onclick="window.location.href='http://localhost:8080/profile'">我的</span>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="http://localhost:8080/people/me/myask">个人主页</a>
+					</li>
+					<li class="divider">
+					</li>
+					<li>
+						<a href="http://localhost:3000/logout">退出登录</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="col-md-12 column" style="margin-top: 30px">
+		<div class="row clearfix">
+			<div class="col-md-1 column">
+			</div>
+			<div class="col-md-7 column" style="padding:0;margin: 2px">
+				<div class="shadow-smaller card-essay" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+					<input id="post_head" type="text" style="margin-top:16px;width:400px" class="form-control" placeholder="标题">
+					<textarea id="post_content" type="" style="height:200px;margin-top:16px" class="form-control" placeholder="内容"></textarea>
+					<div style="height: 100px;">
+						<div style="margin-left:10px;margin-top:16px;float: left;" th:each="key:${CardTag}">
+							<span th:onclick="'javascript:setTagId(\''+${key.id}+'\')'" class="text-info anslike" th:text="${key.tag_name}" style="background-color:#f3f3f3;padding:6px 12px 6px 12px;border: #f3f3f3 1px solid;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;"></span>
+						</div>
+					</div>
+					<button id="post_button" type="submit" class="btn btn-primary center-block" style="width:300px;height: 40px;margin-top: 20px">提交</button>
+				</div>
+				<br/>
+			</div>
+			<div class="col-md-3 column" style=";padding: 0;margin: 2px;margin-left: 12px">
+			
+			</div>
+			<div class="col-md-1 column">
+			</div>
+		</div>
+		<hr style="margin: 20px;">
+		<div class="row clearfix">
+			<div class="col-md-2 column">
+			</div>
+			<div class="col-md-5 column">
+				<address> <strong>hit.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
+			</div>
+			<div class="col-md-3 column">
+			</div>
+			<div class="col-md-2 column">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" charset="UTF-8">
+    function ParentTree() {this.nodes = [];}function ParentTreeNode(data, parent) {this.data = data || null;this.parent = parent || 0;}
+    
+    var thisCommunityId=0;
+    var thisTagId1=0;
+    var thisTagId2=0;
+    var thisTagId3=0;
+    
+    function setTagId(tag_id) {
+        if(tag_id==thisTagId1 ||tag_id == thisTagId2||tag_id==thisTagId3){
+            console.log("id已存在")
+        }
+        else {
+            if(thisTagId1 == 0){
+                thisTagId1=tag_id
+            }
+            else if(thisTagId2 == 0){
+                thisTagId2=tag_id
+            }
+            else if(thisTagId3 == 0){
+                thisTagId3=tag_id
+            }
+        }
+        alert(thisTagId1+" "+thisTagId2+" "+thisTagId3)
+    }
+    
+    $(document).ready(function () {
+        //post_button
+        $("#post_button").click(function () {
+            
+            data={
+                "head":$("#post_head").val(),
+                "content":$("#post_content").val(),
+                "community_id":1,
+	            "tag_id1":thisTagId1,
+	            "tag_id2":thisTagId2,
+	            "tag_id3":thisTagId3
+            }
+            $.ajax({
+                url:"http://localhost:8080/api/post",
+                type:"POST",
+                dataType:"json",
+                data:JSON.stringify(data),
+                contentType:"application/json; charset=UTF-8",
+                success:function (data) {
+                    if(data.msg=="success")  {
+                        // alert("liked")
+                        alert("发布成功！")
+                    }
+                    else if(data.msg=="failed"){
+                        // alert("canceled")
+                        window.location.reload()
+                    }
+                },
+            })
+        })
+	    
+    })
+
+</script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
