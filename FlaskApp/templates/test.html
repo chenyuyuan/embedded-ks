@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <style>
+        .shadow{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+        }
+        .shadow-smaller{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+        }
+    </style>
+</head>
+<body>
+<div id="good">
+    <div id="qq" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+    <div>
+        <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
+        <span>小明:</span>
+        <span>233333</span>
+    </div>
+    <div style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+        <div>
+            <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
+            <span>小明:</span>
+            <span>233333</span>
+        </div>
+        <div name="9" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+            <div>
+                <img src="http://127.0.0.1:3000/static/userhead/1.jpg" style="width: 15px">
+                <span>小明:</span>
+                <span>233333</span>
+            </div>
+        </div>
+    </div>
+    <div name="data.count" style="background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+        <div>
+            <img src="http://127.0.0.1:3000/static/userhead/data.myuid.jpg" style="width: 15px">
+            <span>data.myname</span>
+            <span>data.content</span>
+            <img src="http://127.0.0.1:3000/static/material/like.jpg" width="13px">
+            <img src="http://127.0.0.1:3000/static/material/unlike.jpg" width="13px">
+            <img class="pppppp" src="http://127.0.0.1:3000/static/material/reply.jpg" width="13px">
+            <img src="http://127.0.0.1:3000/static/material/tipoff.png" width="13px">
+            <span class="pull-right">now</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $('div[name*="12"]').on('click', function(){console.log('click12');})
+    $("#qq").append("<div name=\"13\" style=\"background-color: #fafafa;margin-top: 10px;border:1px solid #eeeeee;padding: 7px;border-top-right-radius:8px; border-top-left-radius:8px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;\">\n" +
+        "        <div>\n" +
+        "            <img src=\"http://127.0.0.1:3000/static/userhead/1.jpg\" style=\"width: 15px\">\n" +
+        "            <span>小明:</span>\n" +
+        "            <span>233333</span>\n" +
+        "        </div>\n" +
+        "    </div>")
+    $('div[name*="13"]').on('click', function(){console.log('click13');})
+    $("#good").find("div[name='9']").on("click",function () {
+        console.log("ptptptptptptptptptptptpt")
+    })
+    $(".pppppp").on("click",function () {
+        alert("112sss")
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <style>
+        .shadow{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+        }
+        .shadow-smaller{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+        }
+
+    </style>
+</head>
+<body style="background-color: #fafafa">
+
+<div class="container-fluid">
+    <div class="col-md-12 column" style="position: fixed;top: 0;z-index: 999">
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-8 column" style="">
+                <div class="row clearfix">
+                    <ul class="nav nav-pills shadow" style="background-color: #ffffff;margin-right: -3px;margin-left: 5px">
+                        <li class="active">
+                            <a href="http://127.0.0.1:3000/home" style="padding: 0 10px 0 10px;font-size: 28px">知</a>
+                        </li>
+                        <li>
+                            <a href="http://127.0.0.1:3000/home">首页</a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="http://127.0.0.1:3000/topicSquare">话题</a>
+                        </li>
+                        <li style="margin-left: 60px;margin-top: 3px">
+                            <div class="input-group" style="width:342px">
+                            <input type="text" class="form-control">
+                            <span class="input-group-addon" style="background-color: #6db0ff;color:white;">搜索</span>
+                        </div>
+            </li>
+                        <li class="dropdown pull-right" style="margin-top: 7px;margin-right: 8px">
+                            <span class="text-muted" name="{{myid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/msg'" style="margin-right: 18px;">消息</span>
+                            <img data-toggle="dropdown" src="http://127.0.0.1:3000/static/userhead/3.jpg" style="width:28px">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="http://127.0.0.1:3000/people/me/myask">个人主页</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="http://127.0.0.1:3000/logout">退出登录</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-2 column">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 column" style="margin-top: 50px">
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-5 column" style="padding:0;margin: 2px">
+                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:10px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
+                    <div style="margin: 3px 10px 8px 8px"><strong>我关注的话题</strong></div>
+                    {% for key in mystartopic%}
+                    <span class="mytopic" style="color:#6255b3;padding:4px 8px 4px 8px;border:1px #daecf5 solid;border-top-right-radius:15px; border-top-left-radius:15px; border-bottom-left-radius:15px; border-bottom-right-radius:15px; "><a href="http://127.0.0.1:3000/topic/{{key.topicid}}/hotanswer">{{key.topic}}</a></span>
+                    {% endfor %}
+                </div>
+                <div class="row clearfix">
+                    {% for key in alltopic%}
+                    <div class="col-md-6 column">
+                        <div class="shadow-smaller" style="width:100%;background-color: white;position: relative;float: left;margin-left: 9px;margin-bottom: 10px;padding:8px">
+                            <img src="http://127.0.0.1:3000/static/topichead/{{key.id}}.jpg" style="width:55px">
+                            <span><a href="http://127.0.0.1:3000/topic/{{key.id}}/hotanswer">{{key.topic}}</a></span><span class="pull-right starring text-muted" style="margin-top: 16px" name="{{key.id}}">关注</span>
+                            <br/>
+                            <span>{{key.topicIntro}}</span>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+
+                <ul class="pagination" style="margin-left: 30px;margin-right: 30px">
+                    <li>
+                        <a href="#">Prev</a>
+                    </li>
+                    <li>
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 column" style="position: fixed;right:16%">
+            </div>
+            <div class="col-md-2 column">
+            </div>
+        </div>
+        <hr style="margin: 20px;">
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-5 column">
+                <address> <strong>hit.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
+            </div>
+            <div class="col-md-3 column">
+            </div>
+            <div class="col-md-2 column">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    $('.starring').click(function () {
+        var a=$(this).attr("name");
+        var data={
+            "topicid":a
+        }
+        $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/submit/topicstar',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    // alert(data.msg)
+                    window.location.reload()
+                }
+            })
+    })
+</script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
+    <style>
+        textarea:focus{
+            outline: 0;
+        }
+        .btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {
+            outline: none;
+            border-color: transparent;
+            box-shadow:none;
+        }
+        .shadow{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+        }
+        .shadow-smaller{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+        }
+
+    </style>
+</head>
+<body style="background-color: #fafafa">
+
+<div class="container-fluid">
+    <div class="col-md-12 column" style="position: fixed;top: 0;z-index: 999">
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-8 column" style="">
+                <div class="row clearfix">
+                    <ul class="nav nav-pills shadow" style="background-color: #ffffff;margin-right: -3px;margin-left: 5px">
+                        <li class="active">
+                            <a href="http://127.0.0.1:3000/home" style="padding: 0 10px 0 10px;font-size: 28px">知</a>
+                        </li>
+                        <li>
+                            <a href="http://127.0.0.1:3000/home">首页</a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#">发现</a>
+                        </li>
+                        <li>
+                            <a class="text-muted" href="http://127.0.0.1:3000/topicSquare">话题</a>
+                        </li>
+                        <li style="margin-left: 60px;margin-top: 3px">
+                            <div class="input-group" style="width:342px">
+                            <input type="text" class="form-control">
+                            <span class="input-group-addon" style="background-color: #6db0ff;color:white;">搜索</span>
+                        </div>
+            </li>
+                        <li class="dropdown pull-right" style="margin-top: 7px;margin-right: 8px">
+                            <span class="text-muted" name="{{myid}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/msg'" style="margin-right: 18px;">消息</span>
+                            <img data-toggle="dropdown" src="http://127.0.0.1:3000/static/userhead/{{user.id}}.jpg" style="width:28px">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="http://127.0.0.1:3000/people/me/myask">个人主页</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="http://127.0.0.1:3000/logout">退出登录</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 column"></div>
+        </div>
+    </div>
+
+    <div class="col-md-12 column" style="margin-top: 50px">
+        <div class="row clearfix">
+            <div class="col-md-2 column"></div>
+            <div class="col-md-8 column">
+                <div class="shadow-smaller" style="position: fixed;width: 1010px;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left:-4px;margin-bottom: 10px;margin-right:-43px;padding:15px;">
+                    <img class="pull-left" src="http://127.0.0.1:3000/static/userhead/{{user.id}}.jpg" style="width: 120px;display: inline-block">
+                    {% if mine=="1" %}
+                    <span class="pull-right editing" onclick="if($('.editchoose').css('display')=='none'){$('.editchoose').css('display','')}else{$('.editchoose').css('display','none')}" style="margin-left: 22px;color:#77839c">编辑个人资料</span>
+                    {% endif %}
+                    <span class="pull-left" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;font-size: 30px;font-family: 'Microsoft JhengHei'">{{user.account}}</span>
+                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:15px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">{{user.shortIntro}}</span>
+                    {% if mine=="0" and starhim=="0" %}
+                    <span class="pull-right follow" name="0_{{fid}}" style="margin-left: 22px;color:#77839c">关注他/她</span>
+                    {% elif mine=="0" and starhim=="1" %}
+                    <span class="pull-right follow" name="1_{{fid}}" style="margin-left: 22px;color:#77839c">取消关注</span>
+                    {% endif %}
+                    {% if mine=="0" %}
+                    <span class="pull-right sendmsg" onclick="if($('.send').css('display')=='none'){$('.send').css('display','')}else{$('.send').css('display','none')}" style="margin-left: 22px;color:#77839c">私信</span>
+                    {% endif %}
+                    <br/>
+                    <br/>
+                    <br/>
+                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">专业  {{user.major}}</span>
+                    <br/>
+                    <span class="pull-left" style="border: #0084ff solid 0px;background-color: white;padding:0px 18px 0px 18px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">年级  {{user.grade}}</span>
+                    <!--<span style="margin-left: 22px;color: #77839c">•••</span>-->
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+            <div class="col-md-2 column"></div>
+        </div>
+        <div class="row clearfix" style="margin-top: 157px">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-5 column" style="padding:0;margin: 2px">
+
+                <div class="shadow-smaller" name="{{fid}}" style="position: fixed;z-index: 100;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/ask'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">提问</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/answer'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">回答</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/comment'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">评论</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/questionstar'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏问题</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/answerstar'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">收藏回答</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注了</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" style="font-weight: bold;border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">关注者</span>
+                    {% if mine=="0" %}
+                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <span style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    {% elif mine=="1" %}
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msgsent'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">我发的消息</span>
+                    <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/msg'" style="border: #f3f3f3 solid 0px;background-color: #ffffff;padding:8px 10px 8px 10px;border-top-right-radius:5px; border-top-left-radius:5px; border-bottom-left-radius:5px; border-bottom-right-radius:5px;color:#0084ff ;">私信</span>
+                    {% endif %}
+                </div>
+                <div style="margin-top: 60px"></div>
+                {%for key in myfollow%}
+                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:15px;border:1px #fafafa;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; ">
+                    <img src="http://127.0.0.1:3000/static/userhead/{{key.id}}.jpg" style="width: 25px" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">
+                    <span style="font-size: 19px;font-family: 'Microsoft JhengHei'" name="{{key.id}}" onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).attr('name')+'/ask'">{{key.account}}</span>
+                    <span style="font-size: 15px;">{{key.shortIntro}}</span>
+                    {% if key.starhim=="0" %}
+                    <span class="pull-right follow" name="0_{{key.id}}" style="margin-left: 22px;color:#77839c">关注他/她</span>
+                    {% elif key.starhim=="1" %}
+                    <span class="pull-right follow" name="1_{{key.id}}" style="margin-left: 22px;color:#77839c">取消关注</span>
+                    {% endif %}
+                </div>
+                {%endfor%}
+                <br/>
+                <ul class="pagination" style="margin-left: 30px;margin-right: 30px">
+                    <li>
+                        <a href="#">Prev</a>
+                    </li>
+                    <li>
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 column" style="position: fixed;right:16%;padding: 0;margin: 2px">
+                <div class="shadow-smaller" style="margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <div name="{{fid}}" style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" class="text-muted" style="text-align: center;display: block;font-size: 16px">关注了</span>
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follow'" class="" style="text-align: center;display: block;font-size: 16px">2</span>
+                    </div>
+                    <div name="{{fid}}" style="width: 50% ;background-color: #ffffff;position:relative;float:left">
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" class="text-muted" style="text-align: center;display: block;font-size: 16px">关注者</span>
+                        <span onclick="window.location.href='http://127.0.0.1:3000/people/'+$(this).parent().attr('name')+'/follower'" class="" style="text-align: center;display: block;font-size: 16px">5</span>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="shadow-smaller editchoose" style="display: none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <div style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <span class="text-muted" onclick="if($('.editinfo').css('display')=='none'){$('.editinfo').css('display','')}else{$('.editinfo').css('display','none')}"  style="text-align: center;display: block;font-size: 16px">编辑信息</span>
+                    </div>
+                    <div style="width: 50% ;background-color: #ffffff;position:relative;float:left">
+                        <span class="text-muted" onclick="if($('.editpassword').css('display')=='none'){$('.editpassword').css('display','')}else{$('.editpassword').css('display','none')}"  style="text-align: center;display: block;font-size: 16px">修改密码</span>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="shadow-smaller editpassword" style="display: none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <div style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <input id="oldpassword" type="password" class="form-control center-block" placeholder="旧密码" style="width:300px;height: 48px">
+                        <input id="password" type="password" class="form-control center-block" placeholder="新密码" style="width:300px;height: 48px">
+                        <input id="password2" type="password" class="form-control center-block" placeholder="再次输入密码" style="width:300px;height: 48px;border-top: 0px">
+                        <p id="tips1" class="text-center text-muted" style="margin-top: 10px"></p>
+                        <button id="submitpassword" type="submit" class="btn btn-primary center-block" style="width:300px;height: 40px;margin-top: 20px">提交</button>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="shadow-smaller editinfo" style="display: none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <div style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <input id="shortintro" type="text" class="form-control center-block" placeholder="个人简介" style="width:300px;height: 48px">
+                        <input id="major" type="text" class="form-control center-block" placeholder="专业" style="width:300px;height: 48px">
+                        <input id="grade" type="text" class="form-control center-block" placeholder="年级" style="width:300px;height: 48px;border-top: 0px">
+                        <p id="tips2" class="text-center text-muted" style="margin-top: 10px"></p>
+                        <button id="submitinfo" type="submit" class="btn btn-primary center-block" style="width:300px;height: 40px;margin-top: 20px">提交</button>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="shadow-smaller send" style="display: none;margin-top: 0;border: #fafafa solid 0px;background-color: white;margin-left: 10px;;margin-bottom: 10px;margin-right:-10px;padding:15px;">
+                    <div style="width: 50% ;background-color: #ffffff;position: relative;float:left;border-right: #f3f3f3 solid 1px">
+                        <input id="msg" type="text" class="form-control center-block" placeholder="私信" style="width:300px;height: 48px">
+                        <p id="tips3" class="text-center text-muted" style="margin-top: 10px"></p>
+                        <button id="sendmsgs" name="{{fid}}" type="submit" class="btn btn-primary center-block" style="width:300px;height: 40px;margin-top: 20px">发送</button>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                
+                
+            </div>
+            <div class="col-md-2 column">
+            </div>
+        </div>
+        <hr style="margin: 20px;">
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-5 column">
+                <address> <strong>hit.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
+            </div>
+            <div class="col-md-3 column">
+            </div>
+            <div class="col-md-2 column">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" charset="UTF-8">
+    $(document).ready(function () {
+          //私信
+        $("#sendmsgs").click(function () {
+            fid=$(this).attr("name")
+            msg=$("#msg").val()
+            tips3=$("#tips3")
+            if(msg==""){
+                tips3.html("请输入")
+            }
+            else{
+                data={
+                    "fid":fid,
+                    "msg":msg
+            }
+            $.ajax({
+                    type:'POST',
+                    url:'http://127.0.0.1:3000/people/send',
+                    contentType: 'application/json; charset=UTF-8',
+                    data:JSON.stringify(data),
+                    dataType:'json',
+                    success:function (data) {
+                        if(data["msg"]=="good"){
+                            tips3.html("已发送")
+                        }
+                        else if(data["msg"]=="no"){
+                            alert("no")
+                        }
+                    }
+                })
+            }
+        })
+        //关注
+        $(".follow").click(function () {
+            a=$(this).attr("name")
+            flag=a[0]
+            fid=''
+            for (var key in a){
+                if(key>1){
+                    fid=fid+a[key]
+                }
+            }
+            data={
+                "flag":flag,
+                "fid":fid
+            }
+            $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/people/follow',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    if(data["msg"]=="good"){
+                        window.location.reload()                        }
+                    else if(data["msg"]=="no"){
+                        alert("no")
+                    }
+                }
+            })
+        })
+        //修改简介
+        $('#submitinfo').click(function () {
+            shortInfo=$('#shortintro').val()
+            major=$('#major').val()
+            grade=$('#grade').val()
+            tips2=$('#tips2')
+            if(shortInfo==""||major==""||grade==""){
+                tips2.html("请输入")
+            }
+            else{
+                tips2.html("")
+                data={
+                "shortIntro":shortInfo,
+                "major":major,
+                "grade":grade
+                }
+                $.ajax({
+                    type:'POST',
+                    url:'http://127.0.0.1:3000/people/editinfo',
+                    contentType: 'application/json; charset=UTF-8',
+                    data:JSON.stringify(data),
+                    dataType:'json',
+                    success:function (data) {
+                        if(data["msg"]=="good"){
+                            tips2.html("修改成功")
+                        }
+                        else if(data["msg"]=="no"){
+                            tips2.html("修改失败")
+                        }
+                    }
+                })
+            }
+            
+        })
+        //修改密码
+        $('#submitpassword').click(function () {
+            oldpassword=$('#oldpassword').val()
+            password=$('#password').val()
+            password2=$('#password2').val()
+            tips1=$('#tips1')
+            if(oldpassword==""||password==""||password2==""){
+                tips1.html("请输入")
+            }
+            else if(oldpassword==password){
+                tips1.html("新密码不能与原密码一致")
+            }
+            else if(password!=password2){
+                tips1.html("两次输入密码不一致")
+            }
+            else if(password==password2){
+                tips1.html("")
+                data={
+                    "oldpassword":oldpassword,
+                    "password":password
+                }
+                $.ajax({
+                    type:'POST',
+                    url:'http://127.0.0.1:3000/people/changepassword',
+                    contentType: 'application/json; charset=UTF-8',
+                    data:JSON.stringify(data),
+                    dataType:'json',
+                    success:function (data) {
+                        if(data["msg"]=="good"){
+                            tips1.html("修改成功")
+                        }
+                        else if(data["msg"]=="no"){
+                            tips1.html("原密码错误")
+                        }
+                    }
+                })
+            }
+        })
+        $('#share').click(function () {
+            alert("111111");
+            var v="ppp";
+            window.clipboardData.setData("text",v);
+        });
+    $('#toanswer').click(function () {
+        if($('#answering').css('display')=='none'){
+            $('#answering').css('display','');
+            // var a={{title|tojson}}
+            // alert(a)
+        }
+    })
+        var data={
+            'questionid':'1'
+        }
+        $('#submitanswer').click(function () {
+            $.ajax({
+                type:'POST',
+                url:'http://127.0.0.1:3000/submit/answering',
+                contentType: 'application/json; charset=UTF-8',
+                data:JSON.stringify(data),
+                dataType:'json',
+                success:function (data) {
+                    alert("good")
+                    alert(data.msg)
+                }
+            })
+        })
+    })
+    </script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
