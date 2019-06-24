@@ -10,7 +10,7 @@ def setup():
 def loop():
 	while True:
         print('Tempearture'+GPIO.input(TempPin))
-		time.sleep(1)
+        time.sleep(1)
 
 def destroy():
 	GPIO.cleanup()                     # Release resource
