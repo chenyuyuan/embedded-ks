@@ -1,56 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c257a1c6-9d42-481b-bcf6-6974be3fcdfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comfig.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/material/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/p1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/articling.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/homecom.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/homelike.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/loginadmin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/logout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofmine.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofmineanswer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofmineanswerstar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofminecomment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofminefollow.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofminefollower.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofminemsg.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofminemsgsent.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pageofmine/pageofminequestionstar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/temp.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/topic.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/topicSquare.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/topicapplying.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/topicquestion.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/articling.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/comment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/home.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/login.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/people.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/question.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/search.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/submit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/topic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/topicSquare.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/topicapplying.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/url/upload.py" beforeDir="false" />
-    </list>
+    <list default="true" id="c257a1c6-9d42-481b-bcf6-6974be3fcdfd" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="78">
+              <caret line="3" column="23" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -119,7 +70,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="2" />
     <option name="width" value="1750" />
     <option name="height" value="1038" />
@@ -235,29 +186,30 @@
       <updated>1561291752939</updated>
       <workItem from="1561291757524" duration="453000" />
       <workItem from="1561293096147" duration="4219000" />
-      <workItem from="1561353080015" duration="9150000" />
+      <workItem from="1561353080015" duration="9814000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13822000" />
+    <option name="totallyTimeSpent" value="14486000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="0" width="1400" height="830" extended-state="0" />
+    <frame x="2" y="0" width="1400" height="830" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18628912" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32947975" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3252149" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3252149" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32808024" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32808024" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -397,8 +349,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="78">
+          <caret line="3" column="23" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
         </state>
       </provider>
     </entry>
