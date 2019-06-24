@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 
-BtnPin = 11
+BtnPin = 29
 
 
 def setup():
@@ -14,8 +14,8 @@ def Print(x):
 		print '    ***********************'
 		print '    *   Button Pressed!   *'
 		print '    ***********************'
-    elif x == 1:
-        print 'it's 1'
+        elif x == 1:
+                print 'it 1'
         
 def detect(chn):
 	Print(GPIO.input(BtnPin))
