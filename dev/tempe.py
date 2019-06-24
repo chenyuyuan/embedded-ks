@@ -9,7 +9,7 @@ def setup():
 
 def loop():
 	while True:
-        print('Tempearture：'+GPIO.input(TempPin))
+        print('Tempearture'+GPIO.input(TempPin))
 		time.sleep(1)
 
 def destroy():
