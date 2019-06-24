@@ -6,15 +6,10 @@ TempPin = 31
 def setup():
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
 	GPIO.setup(TempPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
-	#GPIO.add_event_detect(TempPin, GPIO.BOTH, callback=detect, bouncetime=200)
-
-        
-def detect(chn):
-	print('Tempearture is '+GPIO.input(TempPin))
 
 def loop():
 	while True:
-        print('Tempearture is '+GPIO.input(TempPin))
+        print('Tempearture：'+GPIO.input(TempPin))
 		time.sleep(1)
 
 def destroy():
