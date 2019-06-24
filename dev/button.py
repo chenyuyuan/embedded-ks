@@ -1,21 +1,28 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 
-TempPin = 31
+BtnPin = 11
+
 
 def setup():
 	GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
-	GPIO.setup(TempPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
-	#GPIO.add_event_detect(TempPin, GPIO.BOTH, callback=detect, bouncetime=200)
+	GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
+	GPIO.add_event_detect(BtnPin, GPIO.BOTH, callback=detect, bouncetime=200)
 
+def Print(x):
+	if x == 0:
+		print '    ***********************'
+		print '    *   Button Pressed!   *'
+		print '    ***********************'
+    elif x == 1:
+        print 'it's 1'
         
 def detect(chn):
-	print('Tempearture is '+GPIO.input(TempPin))
+	Print(GPIO.input(BtnPin))
 
 def loop():
 	while True:
-        print('Tempearture is '+GPIO.input(TempPin))
-		time.sleep(1)
+		pass
 
 def destroy():
 	GPIO.cleanup()                     # Release resource
