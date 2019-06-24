@@ -10,7 +10,7 @@ def setup():
 
         
 def detect(chn):
-	print('Tempearture is 'GPIO.input(BtnPin))
+	print('Tempearture is 'GPIO.input(TempPin))
 
 def loop():
 	while True:
