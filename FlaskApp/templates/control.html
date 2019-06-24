@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="http://localhost:8080/img/favicon.ico">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <br/>
+            <p align="center" class="center-block">rgb_led</p>
+            <input id="rled" class="form-control center-block" style="width:150px;height: 36px" placeholder="R">
+            <input id="gled" class="form-control center-block" style="width:150px;height: 36px" placeholder="G">
+            <input id="bled" class="form-control center-block" style="width:150px;height: 36px" placeholder="B">
+            <p id="tips" class="text-center text-muted" style="margin-top: 10px"></p>
+            <button id="rgb_led_click" class="btn btn-primary center-block">确定</button>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#rgb_led_click").click(function () {
+            rled=$("#rled").val();
+            gled=$("#gled").val();
+            bled=$("#bled").val();
+            if(rled==""&&gled==""&&bled==""){
+                $("#tips").html("输入rbg值")
+            }
+            else{
+                data=JSON.stringify({
+                    "rvalue":rled,
+                    "gvalue":gled,
+                    "bvalue":bled
+                })
+                $.ajax({
+                    type:'POST',
+                    url:'http://localhost:8080/rgb_led',
+                    contentType: 'application/json; charset=UTF-8',
+                    data:data,
+                    dataType:'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success:function (data) {
+                        console.log(data)
+                        if(data["data"]["msg"]=="login successfully") {
+                            console.log("lighted")
+                        }
+                        else if(data["data"]["message"]=="loginerror") {
+                            $("#tips").html("error")
+                        }
+                    },
+                    error:function(a,b,c) {
+                        console.log(a.status+"::"+a.readyState+"::"+b)
+                    }
+                })
+            }
+        })
+    })
+</script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</html>
