@@ -45,10 +45,13 @@
         <div class="row clearfix">
             <ul class="nav nav-pills shadow" style="height:50px;background-color: #ffffff;margin-right: 0px;margin-left: 0px">
                 <li class="active">
-                    <a href="http://localhost:8080/home" style="padding: 0 12px 0 12px;font-size: 28px">A</a>
+                    <a style="padding: 0 12px 0 12px;font-size: 36px">Y</a>
                 </li>
-                <li>
-                    <a style="font-size:16px; margin-top:2px" href="http://localhost:8080/home"></a>
+                <li style="margin-left: 500px;margin-top: 10px">
+                    <p style="font-size:16px; margin-top:2px">160400227陈煜元</p>
+                </li>
+                <li style="margin-left: 50px;margin-top: 10px">
+                    <p style="font-size:16px; margin-top:2px">160400229侯锐</p>
                 </li>
             </ul>
         </div>
@@ -57,14 +60,25 @@
             </div>
             <div class="col-md-3 column">
                 <div class="shadow-smaller" style="background-color: white;margin-left: 0px;margin-right:0px;padding:15px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
-                    <p class="center-block">rgb_led</p>
+                    <h4>RGB LED灯</h4>
                     <button id="picker">Show Color Picker</button>
                     <div align="center" class="center-block" id="picker"></div>
                     <button id="rgb_led_click" class="btn btn-primary">点亮</button>
+                    <hr/>
+                    <div style="color: blue">历史记录</div>
+                    {%for key in listrgb%}
+                        <div>
+                            <span class="text-muted" style="color: red">{{key[2]}}</span>
+                            <span class="text-muted" style="color: green">{{key[3]}}</span>
+                            <span class="text-muted" style="color: blue">{{key[4]}}</span>
+                            <span id="rgb_led_click2" onclick="getlist({{key[2]}},{{key[3]}},{{key[4]}})">点亮</span>
+                        </div>
+                    {%endfor%}
                 </div>
             </div>
             <div class="col-md-4 column">
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:10px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+                    <h4>无源蜂鸣器</h4>
                     <div style="width: auto;margin-top: 5px">
                         <span>Low C&nbsp&nbsp&nbsp&nbsp</span>
                         <button onclick="clicksound(1)" class="btn btn-primary">do</button>
@@ -97,6 +111,7 @@
                     </div>
                 </div>
                 <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:10px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+                    <h4>温度传感器</h4>
                     <span>温度&nbsp</span>
                     <span id="temperature"></span>
                     <span id="temperature">℃</span>
@@ -106,16 +121,21 @@
                     <div style="color: blue">历史记录</div>
                     {%for key in listtemp%}
                         <div>
-                            <span class="text-muted">{{key.temperature}}℃</span>
-                            <span class="text-muted">采集于{{key.time}}</span>
+                            <span class="text-muted">{{key[3]}}℃</span>
+                            <span class="text-muted">采集于{{key[2]}}</span>
                         </div>
-
                     {%endfor%}
                 </div>
-
-
             </div>
             <div class="col-md-3 column">
+                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:10px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+                    <h4>超声波传感器</h4>
+                    <span>声波测量距离&nbsp</span>
+                    <span id="distance"></span>
+                    <span id="temperature">cm</span>
+                    <br/>
+                    <button id="temperature_button" class="btn btn-primary">点击测量</button>
+                </div>
             </div>
             <div class="col-md-1 column">
             </div>
@@ -123,6 +143,35 @@
     </div>
 </body>
 <script type="text/javascript">
+    function getlist(r,g,b) {
+        data=JSON.stringify({
+            "rvalue":r,
+            "gvalue":g,
+            "bvalue":b
+        })
+        $.ajax({
+            type:'POST',
+            url:'http://192.168.43.72:5000/rgb_led',
+            contentType: 'application/json; charset=UTF-8',
+            data:data,
+            dataType:'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            success:function (data) {
+                console.log(data)
+                if(data["data"]["msg"]=="login successfully") {
+                    console.log("lighted")
+                }
+                else if(data["data"]["message"]=="loginerror") {
+                    $("#tips").html("error")
+                }
+            },
+            error:function(a,b,c) {
+                console.log(a.status+"::"+a.readyState+"::"+b)
+            }
+        })
+    }
     function clicksound(soundnumber) {
         console.log(soundnumber)
         data=JSON.stringify({
@@ -186,38 +235,33 @@
         })
     });
      $("#rgb_led_click").click(function () {
-        if(rled==""&&gled==""&&bled==""){
-            $("#tips").html("输入rbg值")
-        }
-        else{
-            data=JSON.stringify({
-                "rvalue":rled,
-                "gvalue":gled,
-                "bvalue":bled
-            })
-            $.ajax({
-                type:'POST',
-                url:'http://192.168.43.72:5000/rgb_led',
-                contentType: 'application/json; charset=UTF-8',
-                data:data,
-                dataType:'json',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success:function (data) {
-                    console.log(data)
-                    if(data["data"]["msg"]=="login successfully") {
-                        console.log("lighted")
-                    }
-                    else if(data["data"]["message"]=="loginerror") {
-                        $("#tips").html("error")
-                    }
-                },
-                error:function(a,b,c) {
-                    console.log(a.status+"::"+a.readyState+"::"+b)
+        data=JSON.stringify({
+            "rvalue":rled,
+            "gvalue":gled,
+            "bvalue":bled
+        })
+        $.ajax({
+            type:'POST',
+            url:'http://192.168.43.72:5000/rgb_led',
+            contentType: 'application/json; charset=UTF-8',
+            data:data,
+            dataType:'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            success:function (data) {
+                console.log(data)
+                if(data["data"]["msg"]=="login successfully") {
+                    console.log("lighted")
                 }
-            })
-        }
+                else if(data["data"]["message"]=="loginerror") {
+                    $("#tips").html("error")
+                }
+            },
+            error:function(a,b,c) {
+                console.log(a.status+"::"+a.readyState+"::"+b)
+            }
+        })
     });
     $(document).ready(function () {
 
