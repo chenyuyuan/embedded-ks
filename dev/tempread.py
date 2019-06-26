@@ -1,0 +1,5 @@
+file = open('/sys/bus/w1/devices/28-01187a999cff/w1_slave')
+text = file.read()
+print(text)
+print(text[-6:-1])
+file.close()

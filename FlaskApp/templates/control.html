@@ -5,65 +5,222 @@
     <title>Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="http://localhost:8080/img/favicon.ico">
     <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="../static/js/colpick.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../static/css/colpick.css" type="text/css"/>
 </head>
-<body>
-    <div class="container">
-        <form>
-            <br/>
-            <p align="center" class="center-block">rgb_led</p>
-            <input id="rled" class="form-control center-block" style="width:150px;height: 36px" placeholder="R">
-            <input id="gled" class="form-control center-block" style="width:150px;height: 36px" placeholder="G">
-            <input id="bled" class="form-control center-block" style="width:150px;height: 36px" placeholder="B">
-            <p id="tips" class="text-center text-muted" style="margin-top: 10px"></p>
-            <button id="rgb_led_click" class="btn btn-primary center-block">确定</button>
-        </form>
+<style>
+        textarea:focus{
+            outline: 0;
+        }
+        .btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {
+            outline: none;
+            border-color: transparent;
+            box-shadow:none;
+        }
+        .shadow{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.12);
+        }
+        .shadow-smaller{
+            -webkit-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            -moz-box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+            box-shadow: 0 1px 5px 0 rgba(0,34,77,.07);
+        }
+        .border-radius-4{
+            border-top-right-radius:4px;
+            border-top-left-radius:4px;
+            border-bottom-left-radius:4px;
+            border-bottom-right-radius:4px;
+        }
+
+    </style>
+<body style="background-color: #DAE0E6">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <ul class="nav nav-pills shadow" style="height:50px;background-color: #ffffff;margin-right: 0px;margin-left: 0px">
+                <li class="active">
+                    <a href="http://localhost:8080/home" style="padding: 0 12px 0 12px;font-size: 28px">A</a>
+                </li>
+                <li>
+                    <a style="font-size:16px; margin-top:2px" href="http://localhost:8080/home"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="row clearfix" style="margin-top: 30px">
+            <div class="col-md-1 column">
+            </div>
+            <div class="col-md-3 column">
+                <div class="shadow-smaller" style="background-color: white;margin-left: 0px;margin-right:0px;padding:15px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+                    <p class="center-block">rgb_led</p>
+                    <button id="picker">Show Color Picker</button>
+                    <div align="center" class="center-block" id="picker"></div>
+                    <button id="rgb_led_click" class="btn btn-primary">点亮</button>
+                </div>
+            </div>
+            <div class="col-md-4 column">
+                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:10px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+                    <div style="width: auto;margin-top: 5px">
+                        <span>Low C&nbsp&nbsp&nbsp&nbsp</span>
+                        <button onclick="clicksound(1)" class="btn btn-primary">do</button>
+                        <button onclick="clicksound(2)" class="btn btn-primary">re</button>
+                        <button onclick="clicksound(3)" class="btn btn-primary">mi</button>
+                        <button onclick="clicksound(4)" class="btn btn-primary">fa</button>
+                        <button onclick="clicksound(5)" class="btn btn-primary">so</button>
+                        <button onclick="clicksound(6)" class="btn btn-primary">la</button>
+                        <button onclick="clicksound(7)" class="btn btn-primary">si</button>
+                    </div>
+                    <div style="width: auto;margin-top: 5px">
+                        <span>Middle C</span>
+                        <button onclick="clicksound(11)" class="btn btn-primary">do</button>
+                        <button onclick="clicksound(12)" class="btn btn-primary">re</button>
+                        <button onclick="clicksound(13)" class="btn btn-primary">mi</button>
+                        <button onclick="clicksound(14)" class="btn btn-primary">fa</button>
+                        <button onclick="clicksound(15)  " class="btn btn-primary">so</button>
+                        <button onclick="clicksound(16)" class="btn btn-primary">la</button>
+                        <button onclick="clicksound(17)" class="btn btn-primary">si</button>
+                    </div>
+                    <div style="width: auto;margin-top: 5px">
+                        <span>High C&nbsp&nbsp&nbsp</span>
+                        <button onclick="clicksound(21)" class="btn btn-primary">do</button>
+                        <button onclick="clicksound(22)" class="btn btn-primary">re</button>
+                        <button onclick="clicksound(23)" class="btn btn-primary">mi</button>
+                        <button onclick="clicksound(24)" class="btn btn-primary">fa</button>
+                        <button onclick="clicksound(25)" class="btn btn-primary">so</button>
+                        <button onclick="clicksound(26)" class="btn btn-primary">la</button>
+                        <button onclick="clicksound(27)" class="btn btn-primary">si</button>
+                    </div>
+                </div>
+                <div class="shadow-smaller" style="background-color: white;margin-left: 10px;margin-right:-10px;padding:10px;border:#CCCCCC;border-width:1px;border-top-right-radius:4px; border-top-left-radius:4px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;border-style:solid ">
+                    <span>温度&nbsp</span>
+                    <span id="temperature"></span>
+                    <span id="temperature">℃</span>
+                    <br/>
+                    <button id="temperature_button" class="btn btn-primary">获取温度</button>
+                    <hr/>
+                    <div style="color: blue">历史记录</div>
+                    {%for key in listtemp%}
+                        <div>
+                            <span class="text-muted">{{key.temperature}}℃</span>
+                            <span class="text-muted">采集于{{key.time}}</span>
+                        </div>
+
+                    {%endfor%}
+                </div>
+
+
+            </div>
+            <div class="col-md-3 column">
+            </div>
+            <div class="col-md-1 column">
+            </div>
+        </div>
     </div>
 </body>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#rgb_led_click").click(function () {
-            rled=$("#rled").val();
-            gled=$("#gled").val();
-            bled=$("#bled").val();
-            if(rled==""&&gled==""&&bled==""){
-                $("#tips").html("输入rbg值")
-            }
-            else{
-                data=JSON.stringify({
-                    "rvalue":rled,
-                    "gvalue":gled,
-                    "bvalue":bled
-                })
-                $.ajax({
-                    type:'POST',
-                    url:'http://localhost:8080/rgb_led',
-                    contentType: 'application/json; charset=UTF-8',
-                    data:data,
-                    dataType:'json',
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    success:function (data) {
-                        console.log(data)
-                        if(data["data"]["msg"]=="login successfully") {
-                            console.log("lighted")
-                        }
-                        else if(data["data"]["message"]=="loginerror") {
-                            $("#tips").html("error")
-                        }
-                    },
-                    error:function(a,b,c) {
-                        console.log(a.status+"::"+a.readyState+"::"+b)
-                    }
-                })
+    function clicksound(soundnumber) {
+        console.log(soundnumber)
+        data=JSON.stringify({
+            "soundnumber":soundnumber
+        })
+        $.ajax({
+            type:'POST',
+            url:'http://192.168.43.72:5000/playsound',
+            contentType: 'application/json; charset=UTF-8',
+            data:data,
+            dataType:'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            success:function (data) {
+                console.log(data)
+                if(data["data"]["msg"]=="success") {
+                    console.log("lighted")
+                }
+            },
+            error:function(a,b,c) {
+                console.log(a.status+"::"+a.readyState+"::"+b)
             }
         })
+    }
+    var chooseColor;
+    var rled = 255;
+    var gled = 255;
+    var bled = 255;
+    $('#picker').colpick({
+        flat:true,
+        layout:'hex',
+        submit:0,
+        onChange:function (hsb,hex,rgb,el,bySetColor) {
+            rled = rgb['r'];
+            gled = rgb['g'];
+            bled = rgb['b'];
+            //console.log(rled);
+        }
+    });
+
+    $("#temperature_button").click(function () {
+        data=JSON.stringify({
+        })
+        $.ajax({
+            type:'POST',
+            url:'http://192.168.43.72:5000/gettemp',
+            contentType: 'application/json; charset=UTF-8',
+            data:data,
+            dataType:'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            success:function (data) {
+                console.log(data)
+                $("#temperature").html(data)
+            },
+            error:function(a,b,c) {
+                console.log(a.status+"::"+a.readyState+"::"+b)
+            }
+        })
+    });
+     $("#rgb_led_click").click(function () {
+        if(rled==""&&gled==""&&bled==""){
+            $("#tips").html("输入rbg值")
+        }
+        else{
+            data=JSON.stringify({
+                "rvalue":rled,
+                "gvalue":gled,
+                "bvalue":bled
+            })
+            $.ajax({
+                type:'POST',
+                url:'http://192.168.43.72:5000/rgb_led',
+                contentType: 'application/json; charset=UTF-8',
+                data:data,
+                dataType:'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success:function (data) {
+                    console.log(data)
+                    if(data["data"]["msg"]=="login successfully") {
+                        console.log("lighted")
+                    }
+                    else if(data["data"]["message"]=="loginerror") {
+                        $("#tips").html("error")
+                    }
+                },
+                error:function(a,b,c) {
+                    console.log(a.status+"::"+a.readyState+"::"+b)
+                }
+            })
+        }
+    });
+    $(document).ready(function () {
+
     })
 </script>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
